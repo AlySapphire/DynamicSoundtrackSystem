@@ -80,5 +80,13 @@ namespace DSS {
 		return m_AssignedChannel;
 	}
 
+	const std::string & AudioFile::GetPath() {
+		return m_Path;
+	}
+
+	const std::string & AudioFile::GetName() {
+		return m_Name;
+	}
+
 }
 

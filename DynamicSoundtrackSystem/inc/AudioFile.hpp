@@ -20,6 +20,9 @@ namespace DSS {
 
 		unsigned int GetChannelNumber();
 
+		const std::string & GetPath();
+		const std::string & GetName();
+
 	protected:
 		friend class AudioManager;
 
