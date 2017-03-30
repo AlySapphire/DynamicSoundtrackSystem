@@ -6,7 +6,7 @@ namespace FMOD {
 
 	class System;
 	class Channel;
-
+	class ChannelGroup;
 }
 
 namespace DSS {
@@ -23,6 +23,12 @@ namespace DSS {
 
 		void Update(float deltaTime);
 
+		//Add an audio source to the sound manager
+		bool AddAudio(const char* p_Path, bool p_LargeFile, unsigned int p_Mode = 0);
+		
+		//Toggle the pause state of a channel
+		void ToggleChannelPause(unsigned int p_Channel);
+
 		static AudioManager* Instance();
 
 	protected:
@@ -32,9 +38,16 @@ namespace DSS {
 
 		std::vector<AudioFile*> m_AudioSources;
 		std::vector<FMOD::Channel*> m_Channels;
+		std::vector<FMOD::ChannelGroup*> m_ChannelGroups;
+
+		//Master channel group
+		FMOD::ChannelGroup* m_MasterGroup;
 
 		float m_Time = 0.0f;
 		unsigned int m_ChannelTracker = 0;
+		unsigned int m_ChannelGroupTracker = 1;
+
+		bool errorCheck(int p_Err);
 
 	};
 
