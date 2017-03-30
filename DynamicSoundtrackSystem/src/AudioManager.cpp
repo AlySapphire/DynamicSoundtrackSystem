@@ -96,6 +96,15 @@ namespace DSS {
 	}
 
 	void AudioManager::Update(float deltaTime) {
+
+		//Update time
+		m_Time += deltaTime;
+
+		//Error handle
+		FMOD_RESULT result;
+
+		//Update the system last
+		result = m_System->update();
 	}
 
 	AudioManager * AudioManager::Instance() {
