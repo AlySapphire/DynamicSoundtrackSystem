@@ -37,12 +37,8 @@ namespace DSS {
 
 		//Create a system object
 		result = FMOD::System_Create(&m_System);
-
 		//Check for errors
-		if(result) {
-			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
-			return false;
-		}
+		if(!errorCheck(result))		return false;
 
 		//Check we have correct version installed
 		uint version;
@@ -55,16 +51,17 @@ namespace DSS {
 
 		//Initialize our system
 		result = m_System->init(p_MaxChannels, FMOD_INIT_NORMAL, 0);
-
 		//Check for errors
-		if(result) {
-			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
-			return false;
-		}
+		if(!errorCheck(result))		return false;
 
 		//Reserve space in our channels vector for the max amount of channels specified
 		if(p_MaxChannels > 0)
 			m_Channels.reserve(p_MaxChannels);
+
+		//Create a master channel group
+		result = m_System->getMasterChannelGroup(&m_MasterGroup);
+		//Check for errors
+		if(!errorCheck(result))		return false;
 
 		return true;
 	}
@@ -79,19 +76,21 @@ namespace DSS {
 			delete iter;
 		}
 
+		//Release channel groups
+		for(auto iter : m_ChannelGroups) {
+			result = iter->release();
+			errorCheck(result);
+		}
+
 		//Unload system
 		result = m_System->close();
 		//Check for errors
-		if(result) {
-			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
-		}
+		errorCheck(result);
 
 		//Release system
 		result = m_System->release();
 		//Check for errors
-		if(result) {
-			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
-		}
+		errorCheck(result);
 
 	}
 
@@ -107,12 +106,65 @@ namespace DSS {
 		result = m_System->update();
 	}
 
+	bool AudioManager::AddAudio(const char * p_Path, bool p_LargeFile, unsigned int p_Mode) {
+		
+		//Error handle
+		FMOD_RESULT result;
+
+		AudioFile* newFile = new AudioFile();
+
+		FMOD::Channel* channel = 0;
+
+		if(!newFile->Load(p_Path, m_System, p_LargeFile, m_ChannelTracker, channel, p_Mode)) {
+			cout << "Could not add audio file " << p_Path << endl;
+			delete newFile;
+			return false;
+		}
+		
+		//Increment the tracker
+		m_ChannelTracker++;
+
+		//Add our file to our list of audio sources
+		m_AudioSources.push_back(newFile);
+
+		//Add our channel
+		m_Channels.push_back(channel);
+
+		return true;
+	}
+
+	void AudioManager::ToggleChannelPause(unsigned int p_Channel) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		bool paused;
+
+		result = m_Channels.at(p_Channel)->getPaused(&paused);
+		errorCheck(result);
+		result = m_Channels.at(p_Channel)->setPaused(!paused);
+		errorCheck(result);
+
+	}
+
 	AudioManager * AudioManager::Instance() {
 		//Check for valid instance
 		if(m_Instance == nullptr)
 			m_Instance = new AudioManager();
 
 		return m_Instance;
+
+	}
+
+	bool AudioManager::errorCheck(int p_Err) {
+
+		//Check for errors
+		if(p_Err) {
+			cout << "Error Code " << p_Err << ": " << FMOD_ErrorString((FMOD_RESULT)p_Err) << endl;
+			return false;
+		}
+
+		return true;
 
 	}
 
