@@ -18,7 +18,7 @@ namespace DSS {
 	AudioFile::~AudioFile() {
 	}
 
-	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_Channel, unsigned int p_Mode) {
+	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel* p_Channel, int p_Mode) {
 		
 		FMOD_RESULT result;
 
@@ -40,6 +40,15 @@ namespace DSS {
 			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
 			return false;
 		}
+		
+		//Start the sound paused so we can alter the attributes without it being audible
+		result = p_System->playSound(m_FMODHandle, 0, true, &p_Channel);
+
+		//Check for errors
+		if(result) {
+			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
+			return false;
+		}
 
 		//Get the file name
 		unsigned int start = m_Path.find_last_of("/\\");
@@ -49,8 +58,7 @@ namespace DSS {
 			m_Name = m_Path;
 		}
 
-		m_AssignedChannel = p_Channel;
-		m_Paused = false;
+		m_AssignedChannel = p_ChannelNum;
 
 		return true;
 	}
@@ -66,6 +74,10 @@ namespace DSS {
 		if(result)
 			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
 
+	}
+
+	unsigned int AudioFile::GetChannelNumber() {
+		return m_AssignedChannel;
 	}
 
 }
