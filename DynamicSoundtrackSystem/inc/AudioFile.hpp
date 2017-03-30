@@ -14,7 +14,7 @@ namespace DSS {
 		AudioFile();
 		virtual ~AudioFile();
 
-		bool Load(const char* p_Path, FMOD::System* p_System, bool p_LargeFile, unsigned int p_Mode = 0);
+		bool Load(const char* p_Path, FMOD::System* p_System, bool p_LargeFile, unsigned int p_Channel, unsigned int p_Mode = 0);
 		void Unload();
 
 	protected:
@@ -24,6 +24,8 @@ namespace DSS {
 
 		FMOD::Sound* m_FMODHandle;
 
+		bool m_Paused;
+		unsigned int m_AssignedChannel;
 
 	};
 

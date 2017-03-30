@@ -18,7 +18,7 @@ namespace DSS {
 	AudioFile::~AudioFile() {
 	}
 
-	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_Mode) {
+	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_Channel, unsigned int p_Mode) {
 		
 		FMOD_RESULT result;
 
@@ -48,6 +48,9 @@ namespace DSS {
 		} else {
 			m_Name = m_Path;
 		}
+
+		m_AssignedChannel = p_Channel;
+		m_Paused = false;
 
 		return true;
 	}
