@@ -33,6 +33,9 @@ namespace DSS {
 		std::vector<AudioFile*> m_AudioSources;
 		std::vector<FMOD::Channel*> m_Channels;
 
+		float m_Time = 0.0f;
+		unsigned int m_ChannelTracker = 0;
+
 	};
 
 }
