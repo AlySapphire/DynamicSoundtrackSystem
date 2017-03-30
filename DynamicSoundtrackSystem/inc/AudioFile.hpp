@@ -15,7 +15,7 @@ namespace DSS {
 		virtual ~AudioFile();
 
 		bool Load(const char* p_Path, FMOD::System* p_System, bool p_LargeFile, unsigned int p_Mode = 0);
-		void Unload(FMOD::System* p_System);
+		void Unload();
 
 	protected:
 

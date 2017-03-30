@@ -52,7 +52,17 @@ namespace DSS {
 		return true;
 	}
 
-	void AudioFile::Unload(FMOD::System * p_System) {
+	void AudioFile::Unload() {
+
+		FMOD_RESULT result;
+
+		//Free the memory
+		result = m_FMODHandle->release();
+
+		//Check for errors
+		if(result)
+			cout << "Error Code " << result << ": " << FMOD_ErrorString(result) << endl;
+
 	}
 
 }
