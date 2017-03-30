@@ -1,5 +1,10 @@
 #pragma once
 
+namespace FMOD {
+
+	class System;
+
+}
 
 namespace DSS {
 
@@ -13,6 +18,7 @@ namespace DSS {
 	protected:
 
 		static AudioManager* m_Instance;
+		FMOD::System* m_System;
 
 	};
 
