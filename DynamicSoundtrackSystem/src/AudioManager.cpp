@@ -115,7 +115,7 @@ namespace DSS {
 
 		FMOD::Channel* channel = 0;
 
-		if(!newFile->Load(p_Path, m_System, p_LargeFile, m_ChannelTracker, channel, p_Mode)) {
+		if(!newFile->Load(p_Path, m_System, p_LargeFile, m_ChannelTracker, &channel, p_Mode)) {
 			cout << "Could not add audio file " << p_Path << endl;
 			delete newFile;
 			return false;

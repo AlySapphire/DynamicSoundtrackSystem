@@ -18,7 +18,7 @@ namespace DSS {
 	AudioFile::~AudioFile() {
 	}
 
-	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel* p_Channel, int p_Mode) {
+	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel** p_Channel, int p_Mode) {
 		
 		FMOD_RESULT result;
 
@@ -42,7 +42,7 @@ namespace DSS {
 		}
 		
 		//Start the sound paused so we can alter the attributes without it being audible
-		result = p_System->playSound(m_FMODHandle, 0, true, &p_Channel);
+		result = p_System->playSound(m_FMODHandle, 0, true, p_Channel);
 
 		//Check for errors
 		if(result) {

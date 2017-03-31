@@ -15,7 +15,7 @@ namespace DSS {
 		AudioFile();
 		virtual ~AudioFile();
 
-		bool Load(const char* p_Path, FMOD::System* p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel* p_Channel, int p_Mode = 0);
+		bool Load(const char* p_Path, FMOD::System* p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel** p_Channel, int p_Mode = 0);
 		void Unload();
 
 		unsigned int GetChannelNumber();
