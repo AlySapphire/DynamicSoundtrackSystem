@@ -187,10 +187,12 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
   <ItemGroup>
     <ClInclude Include="inc\AudioFile.hpp" />
     <ClInclude Include="inc\AudioManager.hpp" />
+    <ClInclude Include="inc\Marker.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AudioFile.cpp" />
     <ClCompile Include="src\AudioManager.cpp" />
+    <ClCompile Include="src\Marker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
