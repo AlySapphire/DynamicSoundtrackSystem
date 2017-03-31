@@ -1,4 +1,4 @@
-#include "AudioManger.hpp"
+#include "AudioManager.hpp"
 
 #include "AudioFile.hpp"
 #include <fmod.hpp>
