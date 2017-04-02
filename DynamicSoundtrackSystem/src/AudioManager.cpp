@@ -147,6 +147,17 @@ namespace DSS {
 
 	}
 
+	void AudioManager::SetChannelLoopPoints(unsigned int p_ChannelIndex, unsigned int p_Start, unsigned int p_End, eTIME_UNIT p_Unit) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		result = m_Channels[p_ChannelIndex]->setLoopPoints(p_Start, (p_Unit == eTIME_MS) ? FMOD_TIMEUNIT_MS : FMOD_TIMEUNIT_PCM, p_End, (p_Unit == eTIME_MS) ? FMOD_TIMEUNIT_MS : FMOD_TIMEUNIT_PCM);
+
+		errorCheck(result);
+
+	}
+
 	AudioManager * AudioManager::Instance() {
 		//Check for valid instance
 		if(m_Instance == nullptr)
