@@ -1,5 +1,8 @@
 #include "ChannelManager.hpp"
 
+#include <fmod.hpp>
+#include <fmod_errors.h>
+
 namespace DSS {
 
 	ChannelManager* ChannelManager::m_Instance = nullptr;

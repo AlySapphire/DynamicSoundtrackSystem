@@ -4,6 +4,7 @@
 #include <fmod.hpp>
 #include <fmod_errors.h>
 #include <iostream>
+#include "ChannelManager.hpp"
 
 #pragma region Using
 using std::cout;

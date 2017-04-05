@@ -17,6 +17,7 @@ namespace DSS {
 	}eTIME_UNIT;
 
 	class AudioFile;
+	class ChannelManager;
 
 	class AudioManager {
 	public:
