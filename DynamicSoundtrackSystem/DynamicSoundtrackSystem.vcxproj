@@ -112,6 +112,7 @@
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
+XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -152,6 +153,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
+XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -178,6 +180,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     </PreBuildEvent>
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
+XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
