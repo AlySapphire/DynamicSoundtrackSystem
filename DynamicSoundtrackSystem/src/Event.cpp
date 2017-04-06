@@ -19,6 +19,9 @@ namespace DSS {
 	}
 
 	Event::~Event() {
+
+		m_DSPs.clear();
+
 	}
 
 	bool Event::CreateTimedEvent(unsigned int p_TimeMs, unsigned int p_EventType, FMOD::ChannelGroup ** p_MasterGroup, FMOD::System** p_System) {
@@ -47,6 +50,8 @@ namespace DSS {
 
 		//Check for errors
 		if(!errCheck(result))	return false;
+
+		m_DSPs.push_back(dsp);
 
 		//Create a thread that sleeps for specified duration then removes the event
 		thread timer([p_TimeMs, p_MasterGroup, dsp] {

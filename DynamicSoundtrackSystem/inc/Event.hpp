@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 namespace FMOD {
 
 	class ChannelGroup;
@@ -20,6 +22,8 @@ namespace DSS {
 	protected:
 
 		bool errCheck(int p_ErrorCode);
+
+		std::vector<FMOD::DSP*> m_DSPs;
 
 	};
 
