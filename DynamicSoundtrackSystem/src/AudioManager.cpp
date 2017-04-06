@@ -5,6 +5,7 @@
 #include <fmod_errors.h>
 #include <iostream>
 #include "ChannelManager.hpp"
+#include "Event.hpp"
 
 #pragma region Using
 using std::cout;
@@ -108,9 +109,6 @@ namespace DSS {
 	}
 
 	bool AudioManager::AddAudio(const char * p_Path, bool p_LargeFile, unsigned int p_Mode) {
-		
-		//Error handle
-		FMOD_RESULT result;
 
 		AudioFile* newFile = new AudioFile();
 
@@ -157,6 +155,19 @@ namespace DSS {
 
 		errorCheck(result);
 
+	}
+
+	bool AudioManager::CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType) {
+		
+		//Event handle
+		Event soundEvent;
+
+		if(!soundEvent.CreateTimedEvent(p_TimeMs, p_EventType, &m_MasterGroup, &m_System)) {
+			cout << "Error: Could not create event." << endl;
+			return false;
+		}
+		
+		return true;
 	}
 
 	AudioManager * AudioManager::Instance() {

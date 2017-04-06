@@ -21,7 +21,7 @@ namespace DSS {
 	Event::~Event() {
 	}
 
-	bool Event::CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType, FMOD::ChannelGroup ** p_MasterGroup, FMOD::System** p_System) {
+	bool Event::CreateTimedEvent(unsigned int p_TimeMs, unsigned int p_EventType, FMOD::ChannelGroup ** p_MasterGroup, FMOD::System** p_System) {
 		
 		//Error handle
 		FMOD_RESULT result;
@@ -29,13 +29,13 @@ namespace DSS {
 		FMOD::DSP* dsp;
 
 		switch(p_EventType) {
-			case eEVENT_HIGHPASS:
+			case 0:
 				result = (*p_System)->createDSPByType(FMOD_DSP_TYPE_HIGHPASS, &dsp);
 				break;
-			case eEVENT_LOWPASS:
+			case 1:
 				result = (*p_System)->createDSPByType(FMOD_DSP_TYPE_LOWPASS, &dsp);
 				break;
-			case eEVENT_ECHO:
+			case 2:
 				result = (*p_System)->createDSPByType(FMOD_DSP_TYPE_ECHO, &dsp);
 				break;
 		}

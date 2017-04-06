@@ -16,6 +16,12 @@ namespace DSS {
 		eTIME_SAMPLES
 	}eTIME_UNIT;
 
+	typedef enum {
+		eEVENT_HIGHPASS,
+		eEVENT_LOWPASS,
+		eEVENT_ECHO
+	}eEVENT_TYPE;
+
 	class AudioFile;
 	class ChannelManager;
 
@@ -37,6 +43,9 @@ namespace DSS {
 
 		//Set the loop points of a channel
 		void SetChannelLoopPoints(unsigned int p_ChannelIndex, unsigned int p_Start, unsigned int p_End, eTIME_UNIT p_Unit);
+
+		//Create a timed event
+		bool CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType);
 
 		static AudioManager* Instance();
 
