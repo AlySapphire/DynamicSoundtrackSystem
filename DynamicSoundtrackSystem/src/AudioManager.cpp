@@ -157,6 +157,22 @@ namespace DSS {
 
 	}
 
+	unsigned int AudioManager::GetChannelPlaybackPosition(unsigned int p_ChannelNum) {
+		
+		//Error handle
+		FMOD_RESULT result;
+
+		unsigned int pos = 0;
+
+		result = m_Channels[p_ChannelNum]->getPosition(&pos, FMOD_TIMEUNIT_MS);
+
+		//Check for errors
+		errorCheck(result);
+
+		return pos;
+
+	}
+
 	bool AudioManager::CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType) {
 		
 		//Event handle

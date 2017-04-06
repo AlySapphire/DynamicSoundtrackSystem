@@ -41,6 +41,8 @@ namespace DSS {
 			case 2:
 				result = (*p_System)->createDSPByType(FMOD_DSP_TYPE_ECHO, &dsp);
 				break;
+			case 3:
+				result = (*p_System)->createDSPByType(FMOD_DSP_TYPE_FLANGE, &dsp);
 		}
 		
 		//Check for errors
