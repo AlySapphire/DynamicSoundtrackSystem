@@ -191,12 +191,14 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     <ClInclude Include="inc\AudioFile.hpp" />
     <ClInclude Include="inc\AudioManager.hpp" />
     <ClInclude Include="inc\ChannelManager.hpp" />
+    <ClInclude Include="inc\Event.hpp" />
     <ClInclude Include="inc\Marker.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AudioFile.cpp" />
     <ClCompile Include="src\AudioManager.cpp" />
     <ClCompile Include="src\ChannelManager.cpp" />
+    <ClCompile Include="src\Event.cpp" />
     <ClCompile Include="src\Marker.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
