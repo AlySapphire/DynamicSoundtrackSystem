@@ -23,6 +23,9 @@ namespace DSS {
 	AudioManager* AudioManager::m_Instance = nullptr;
 
 	AudioManager::AudioManager() {
+
+		channelManager = ChannelManager::Instance();
+
 	}
 
 	AudioManager::~AudioManager() {
@@ -55,10 +58,6 @@ namespace DSS {
 		result = m_System->init(p_MaxChannels, FMOD_INIT_NORMAL, 0);
 		//Check for errors
 		if(!errorCheck(result))		return false;
-
-		//Reserve space in our channels vector for the max amount of channels specified
-		if(p_MaxChannels > 0)
-			m_Channels.reserve(p_MaxChannels);
 
 		//Create a master channel group
 		result = m_System->getMasterChannelGroup(&m_MasterGroup);
@@ -127,50 +126,10 @@ namespace DSS {
 		m_AudioSources.push_back(newFile);
 
 		//Add our channel
-		m_Channels.push_back(channel);
+		channelManager->AddChannel(channel);
+		//m_Channels.push_back(channel);
 
 		return true;
-	}
-
-	void AudioManager::ToggleChannelPause(unsigned int p_Channel) {
-
-		//Error handle
-		FMOD_RESULT result;
-
-		bool paused;
-
-		result = m_Channels.at(p_Channel)->getPaused(&paused);
-		errorCheck(result);
-		result = m_Channels.at(p_Channel)->setPaused(!paused);
-		errorCheck(result);
-
-	}
-
-	void AudioManager::SetChannelLoopPoints(unsigned int p_ChannelIndex, unsigned int p_Start, unsigned int p_End, eTIME_UNIT p_Unit) {
-
-		//Error handle
-		FMOD_RESULT result;
-
-		result = m_Channels[p_ChannelIndex]->setLoopPoints(p_Start, (p_Unit == eTIME_MS) ? FMOD_TIMEUNIT_MS : FMOD_TIMEUNIT_PCM, p_End, (p_Unit == eTIME_MS) ? FMOD_TIMEUNIT_MS : FMOD_TIMEUNIT_PCM);
-
-		errorCheck(result);
-
-	}
-
-	unsigned int AudioManager::GetChannelPlaybackPosition(unsigned int p_ChannelNum) {
-		
-		//Error handle
-		FMOD_RESULT result;
-
-		unsigned int pos = 0;
-
-		result = m_Channels[p_ChannelNum]->getPosition(&pos, FMOD_TIMEUNIT_MS);
-
-		//Check for errors
-		errorCheck(result);
-
-		return pos;
-
 	}
 
 	bool AudioManager::CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType) {
