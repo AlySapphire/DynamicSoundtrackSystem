@@ -127,7 +127,6 @@ namespace DSS {
 
 		//Add our channel
 		channelManager->AddChannel(channel);
-		//m_Channels.push_back(channel);
 
 		return true;
 	}
