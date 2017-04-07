@@ -39,7 +39,6 @@ namespace DSS {
 		//Add an audio source to the sound manager
 		bool AddAudio(const char* p_Path, bool p_LargeFile, unsigned int p_Mode = 0);
 		
-		//MOVE SOMEWHERE ELSE
 		//Create a timed event
 		bool CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType);
 
