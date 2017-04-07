@@ -50,7 +50,7 @@ namespace DSS {
 		//MOVE TO CHANNEL MANAGER
 		//Get channel position
 		unsigned int GetChannelPlaybackPosition(unsigned int p_ChannelNum);
-
+		//test
 		//MOVE SOMEWHERE ELSE
 		//Create a timed event
 		bool CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType);
