@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 namespace FMOD {
 
 	class ChannelGroup;
@@ -18,6 +20,8 @@ namespace DSS {
 	protected:
 
 		static ChannelGroupManager* m_Instance;
+
+		std::vector<FMOD::ChannelGroup*> m_ChannelGroups;
 
 	};
 
