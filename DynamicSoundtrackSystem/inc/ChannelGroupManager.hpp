@@ -10,6 +10,8 @@ namespace FMOD {
 
 namespace DSS {
 
+	class AudioManager;
+
 	class ChannelGroupManager {
 	public:
 		ChannelGroupManager();
@@ -20,6 +22,8 @@ namespace DSS {
 	protected:
 
 		static ChannelGroupManager* m_Instance;
+
+		AudioManager* m_AudioManagerHandle;
 
 		std::vector<FMOD::ChannelGroup*> m_ChannelGroups;
 

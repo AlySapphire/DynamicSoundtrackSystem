@@ -48,12 +48,12 @@ namespace DSS {
 
 	protected:
 
+		friend class ChannelGroupManager;
+
 		static AudioManager* m_Instance;
 		FMOD::System* m_System;
 
 		std::vector<AudioFile*> m_AudioSources;
-		//MOVE SOMEWHERE ELSE
-		std::vector<FMOD::ChannelGroup*> m_ChannelGroups;
 
 		//Master channel group
 		FMOD::ChannelGroup* m_MasterGroup;

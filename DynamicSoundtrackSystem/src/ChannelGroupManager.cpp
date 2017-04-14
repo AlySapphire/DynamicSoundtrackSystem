@@ -2,12 +2,16 @@
 
 #include <fmod.hpp>
 #include <fmod_errors.h>
+#include "AudioManager.hpp"
 
 namespace DSS {
 
 	ChannelGroupManager* ChannelGroupManager::m_Instance = nullptr;
 
 	ChannelGroupManager::ChannelGroupManager() {
+
+		m_AudioManagerHandle = AudioManager::Instance();
+
 	}
 
 	ChannelGroupManager::~ChannelGroupManager() {

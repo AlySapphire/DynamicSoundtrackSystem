@@ -77,12 +77,6 @@ namespace DSS {
 			delete iter;
 		}
 
-		//Release channel groups
-		for(auto iter : m_ChannelGroups) {
-			result = iter->release();
-			errorCheck(result);
-		}
-
 		//Unload system
 		result = m_System->close();
 		//Check for errors
