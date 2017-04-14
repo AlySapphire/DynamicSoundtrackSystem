@@ -113,6 +113,7 @@
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
+XCOPY "$(ProjectDir)inc\ChannelGroupManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -154,6 +155,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
+XCOPY "$(ProjectDir)inc\ChannelGroupManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -181,6 +183,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     <PostBuildEvent>
       <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
+XCOPY "$(ProjectDir)inc\ChannelGroupManager.hpp" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -190,6 +193,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
   <ItemGroup>
     <ClInclude Include="inc\AudioFile.hpp" />
     <ClInclude Include="inc\AudioManager.hpp" />
+    <ClInclude Include="inc\ChannelGroupManager.hpp" />
     <ClInclude Include="inc\ChannelManager.hpp" />
     <ClInclude Include="inc\Event.hpp" />
     <ClInclude Include="inc\Marker.hpp" />
@@ -197,6 +201,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
   <ItemGroup>
     <ClCompile Include="src\AudioFile.cpp" />
     <ClCompile Include="src\AudioManager.cpp" />
+    <ClCompile Include="src\ChannelGroupManager.cpp" />
     <ClCompile Include="src\ChannelManager.cpp" />
     <ClCompile Include="src\Event.cpp" />
     <ClCompile Include="src\Marker.cpp" />
