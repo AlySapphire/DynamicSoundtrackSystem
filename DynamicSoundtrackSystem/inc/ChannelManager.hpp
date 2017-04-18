@@ -25,6 +25,7 @@ namespace DSS {
 
 	protected:
 		friend class AudioManager;
+		friend class ChannelGroupManager;
 
 		static ChannelManager* m_Instance;
 
