@@ -20,7 +20,6 @@ namespace DSS {
 
 	ChannelGroupManager::ChannelGroupManager() {
 
-
 	}
 
 	ChannelGroupManager::~ChannelGroupManager() {
