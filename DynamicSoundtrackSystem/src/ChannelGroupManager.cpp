@@ -62,6 +62,15 @@ namespace DSS {
 			cout << "Error! Could not create Channel-Group " << p_Name << endl;
 			return false;
 		}
+
+		//Link group to master group
+		result = am->m_MasterGroup->addGroup(group);
+
+		//If linking fails then return false
+		if(!errCheck(result)) {
+			cout << "Error! Could not link Channel-Group " << p_Name << " to master group." << endl;
+			return false;
+		}
 		
 		//Add channels to group (if any)
 		for(auto iter = 0; iter < p_Count; iter++) {
