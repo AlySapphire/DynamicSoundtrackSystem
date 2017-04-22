@@ -2,6 +2,9 @@
 
 #include <vector>
 
+//TODO: Add multi-tracking event support
+//TODO: Add timed and modifiable events
+
 namespace FMOD {
 
 	class ChannelGroup;
