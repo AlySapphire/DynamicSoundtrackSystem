@@ -252,7 +252,7 @@ namespace DSS {
 		FMOD_RESULT result;
 
 		string channelGroupName = p_ChannelGroupName;
-		char* name = new char[channelGroupName.size()];
+		char* name = new char[channelGroupName.size() + 1];
 
 		int index = 0;
 
