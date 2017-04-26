@@ -339,6 +339,27 @@ namespace DSS {
 
 	}
 
+	int ChannelGroupManager::GetNumChannels(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return -1;
+		}
+
+		int numChannels = 0;
+
+		result = m_ChannelGroups[index]->getNumChannels(&numChannels);
+		errCheck(result);
+
+		return numChannels;
+
+	}
+
 	bool ChannelGroupManager::AddChannels(const char * p_Name, std::vector<unsigned int> p_ChannelNumbers) {
 		
 		//Error handle

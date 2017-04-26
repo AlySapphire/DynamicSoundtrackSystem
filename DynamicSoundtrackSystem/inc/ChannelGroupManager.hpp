@@ -46,6 +46,8 @@ namespace DSS {
 		bool IsPaused(const char* p_GroupName);
 		//Mute-state
 		bool IsMuted(const char* p_GroupName);
+		//Current number of channels
+		int GetNumChannels(const char* p_GroupName);
 		
 	protected:
 
