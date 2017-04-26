@@ -96,6 +96,8 @@ namespace DSS {
 			}
 
 		}
+
+		m_ChannelGroups.push_back(group);
 		
 		return true;
 	}
@@ -150,6 +152,8 @@ namespace DSS {
 			}
 
 		}
+
+		m_ChannelGroups.push_back(group);
 
 		return true;
 
