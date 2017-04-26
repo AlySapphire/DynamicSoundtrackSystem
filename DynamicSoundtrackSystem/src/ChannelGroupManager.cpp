@@ -53,6 +53,13 @@ namespace DSS {
 		AudioManager* am = AudioManager::Instance();
 		ChannelManager* cm = ChannelManager::Instance();
 
+		int index = findChannelGroup(p_Name);
+
+		if(index != -1) {
+			cout << "Error! " << p_Name << " is an existing channel-group." << endl;
+			return false;
+		}
+
 		//Create a channel group
 		FMOD::ChannelGroup* group;
 		result = am->m_System->createChannelGroup(p_Name, &group);
@@ -91,6 +98,61 @@ namespace DSS {
 		}
 		
 		return true;
+	}
+
+	bool ChannelGroupManager::CreateChannelGroup(const char * p_Name, std::vector<unsigned int> p_ChannelNumbers) {
+		//Error handle
+		FMOD_RESULT result;
+
+		AudioManager* am = AudioManager::Instance();
+		ChannelManager* cm = ChannelManager::Instance();
+
+		int index = findChannelGroup(p_Name);
+
+		if(index != -1) {
+			cout << "Error! " << p_Name << " is an existing channel-group." << endl;
+			return false;
+		}
+
+		//Create a channel group
+		FMOD::ChannelGroup* group;
+		result = am->m_System->createChannelGroup(p_Name, &group);
+
+		//If channelgroup creation fails then return false
+		if(!errCheck(result)) {
+			cout << "Error! Could not create Channel-Group " << p_Name << endl;
+			return false;
+		}
+
+		//Link group to master group
+		result = am->m_MasterGroup->addGroup(group);
+
+		//If linking fails then return false
+		if(!errCheck(result)) {
+			cout << "Error! Could not link Channel-Group " << p_Name << " to master group." << endl;
+			return false;
+		}
+
+		//Add channels to group (if any)
+		for(auto iter : p_ChannelNumbers) {
+
+			//Safety check to avoid access violations
+			if(iter > cm->m_Channels.size()) {
+				cout << "Error! Channel index " << iter << " does not exist." << endl;
+				return false;
+			}
+
+			result = cm->m_Channels[iter]->setChannelGroup(group);
+
+			if(!errCheck(result)) {
+				cout << "Error! Could not add Channel number";
+				return false;
+			}
+
+		}
+
+		return true;
+
 	}
 
 	void ChannelGroupManager::ToggleChannelGroupPause(const char * p_GroupName) {
@@ -145,6 +207,39 @@ namespace DSS {
 		result = m_ChannelGroups[index]->setPaused(true);
 		errCheck(result);
 
+	}
+
+	bool ChannelGroupManager::AddChannels(const char * p_Name, std::vector<unsigned int> p_ChannelNumbers) {
+		
+		//Error handle
+		FMOD_RESULT result;
+
+		ChannelManager* cm = ChannelManager::Instance();
+
+		//Find channel group
+		int index = findChannelGroup(p_Name);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_Name << endl;
+			return false;
+		}
+
+		for(auto iter : p_ChannelNumbers) {
+			//Safety check to avoid access violations
+			if(iter > cm->m_Channels.size()) {
+				cout << "Error! Channel index " << iter << " does not exist." << endl;
+				return false;
+			}
+
+			result = cm->m_Channels[iter]->setChannelGroup(m_ChannelGroups[index]);
+
+			if(!errCheck(result)) {
+				cout << "Error! Could not add Channel number";
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	int ChannelGroupManager::findChannelGroup(const char * p_ChannelGroupName) {

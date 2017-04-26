@@ -24,11 +24,15 @@ namespace DSS {
 
 		//Create a channel group
 		bool CreateChannelGroup(const char* p_Name, unsigned int* p_ChannelNumbers = nullptr, unsigned int p_Count = 0);
+		bool CreateChannelGroup(const char* p_Name, std::vector<unsigned int> p_ChannelNumbers);
 
 		//Play and pause functions
 		void ToggleChannelGroupPause(const char* p_GroupName);
 		void PlayChannelGroup(const char* p_GroupName);
 		void PauseChannelGroup(const char* p_GroupName);
+
+		//Add channels
+		bool AddChannels(const char* p_Name, std::vector<unsigned int> p_ChannelNumbers);
 
 	protected:
 
