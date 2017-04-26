@@ -70,9 +70,9 @@ namespace DSS {
 
 	}
 
-	void ChannelManager::AddChannel(FMOD::Channel * p_Channel) {
+	void ChannelManager::AddChannel(FMOD::Channel ** p_Channel) {
 
-		m_Channels.push_back(p_Channel);
+		m_Channels.push_back(*p_Channel);
 		
 	}
 

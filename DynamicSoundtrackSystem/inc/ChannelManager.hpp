@@ -31,7 +31,7 @@ namespace DSS {
 
 		std::vector<FMOD::Channel*> m_Channels;
 
-		void AddChannel(FMOD::Channel* p_Channel);
+		void AddChannel(FMOD::Channel** p_Channel);
 
 		bool errCheck(int p_Error);
 

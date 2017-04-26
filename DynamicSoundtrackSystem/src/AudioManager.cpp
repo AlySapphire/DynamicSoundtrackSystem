@@ -120,7 +120,7 @@ namespace DSS {
 		m_AudioSources.push_back(newFile);
 
 		//Add our channel
-		channelManager->AddChannel(channel);
+		channelManager->AddChannel(&channel);
 
 		return true;
 	}
