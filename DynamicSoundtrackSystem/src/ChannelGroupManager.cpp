@@ -221,6 +221,124 @@ namespace DSS {
 
 	}
 
+	void ChannelGroupManager::ToggleChannelGroupMute(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return;
+		}
+
+		bool muted = false;
+
+		m_ChannelGroups[index]->getMute(&muted);
+		errCheck(result);
+		m_ChannelGroups[index]->setMute(!muted);
+		errCheck(result);
+
+	}
+
+	void ChannelGroupManager::MuteChannelGroup(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return;
+		}
+
+		result = m_ChannelGroups[index]->setMute(true);
+		errCheck(result);
+
+	}
+
+	void ChannelGroupManager::UnmuteChannelGroup(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return;
+		}
+
+		result = m_ChannelGroups[index]->setMute(false);
+		errCheck(result);
+
+	}
+
+	bool ChannelGroupManager::IsPlaying(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return false;
+		}
+
+		bool playing = false;
+
+		result = m_ChannelGroups[index]->isPlaying(&playing);
+		errCheck(result);
+
+		return playing;
+
+	}
+
+	bool ChannelGroupManager::IsPaused(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return false;
+		}
+
+		bool paused = false;
+
+		result = m_ChannelGroups[index]->getPaused(&paused);
+		errCheck(result);
+
+		return paused;
+
+	}
+
+	bool ChannelGroupManager::IsMuted(const char * p_GroupName) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return false;
+		}
+
+		bool muted = false;
+
+		result = m_ChannelGroups[index]->getMute(&muted);
+		errCheck(result);
+
+		return muted;
+
+	}
+
 	bool ChannelGroupManager::AddChannels(const char * p_Name, std::vector<unsigned int> p_ChannelNumbers) {
 		
 		//Error handle
