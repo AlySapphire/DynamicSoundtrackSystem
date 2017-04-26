@@ -70,6 +70,26 @@ namespace DSS {
 
 	}
 
+	void ChannelManager::PlayChannel(unsigned int p_ChannelNum) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		result = m_Channels[p_ChannelNum]->setPaused(false);
+		errCheck(result);
+
+	}
+
+	void ChannelManager::PauseChannel(unsigned int p_ChannelNum) {
+
+		//Error handle
+		FMOD_RESULT result;
+
+		result = m_Channels[p_ChannelNum]->setPaused(true);
+		errCheck(result);
+
+	}
+
 	void ChannelManager::AddChannel(FMOD::Channel ** p_Channel) {
 
 		m_Channels.push_back(*p_Channel);

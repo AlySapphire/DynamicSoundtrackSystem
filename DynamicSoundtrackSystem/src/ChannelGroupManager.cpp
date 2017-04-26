@@ -95,7 +95,11 @@ namespace DSS {
 				return false;
 			}
 
+			cm->PlayChannel(iter);
+
 		}
+
+		group->setPaused(true);
 
 		m_ChannelGroups.push_back(group);
 		
@@ -151,7 +155,11 @@ namespace DSS {
 				return false;
 			}
 
+			cm->PlayChannel(iter);
+
 		}
+
+		group->setPaused(true);
 
 		m_ChannelGroups.push_back(group);
 
