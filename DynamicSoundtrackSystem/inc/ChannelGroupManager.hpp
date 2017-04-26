@@ -4,6 +4,7 @@
 
 //TODO: Add multi-tracking event support
 //TODO: Add timed and modifiable events
+//TODO: Add a submixer class for each ChannelGroup to allow for mixing of indivisual channels assigned to a ChannelGroup
 
 namespace FMOD {
 
