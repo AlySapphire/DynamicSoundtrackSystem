@@ -191,7 +191,7 @@ namespace DSS {
 			return;
 		}
 
-		result = m_ChannelGroups[index]->getPaused(false);
+		result = m_ChannelGroups[index]->setPaused(false);
 		errCheck(result);
 
 	}
@@ -252,12 +252,12 @@ namespace DSS {
 		FMOD_RESULT result;
 
 		string channelGroupName = p_ChannelGroupName;
-		char* name = new char[channelGroupName.size() + 1];
+		char* name = new char[channelGroupName.capacity()];
 
 		int index = 0;
 
 		for(auto iter : m_ChannelGroups) {
-			result = iter->getName(name, channelGroupName.length());
+			result = iter->getName(name, channelGroupName.capacity());
 			errCheck(result);
 
 			int comparison = strcmp(name, p_ChannelGroupName);
