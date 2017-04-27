@@ -23,6 +23,8 @@ namespace DSS {
 		const std::string & GetPath();
 		const std::string & GetName();
 
+		FMOD::Sound* GetHandle();
+
 	protected:
 		friend class AudioManager;
 

@@ -78,6 +78,7 @@ namespace DSS {
 
 		friend class ChannelGroupManager;
 		friend class Event;
+		friend class Submixer;
 
 		static AudioManager* m_Instance;
 		FMOD::System* m_System;

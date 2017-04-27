@@ -4,6 +4,8 @@
 #include <fmod_errors.h>
 #include <iostream>
 #include <algorithm>
+#include "AudioManager.hpp"
+#include "AudioFile.hpp"
 
 #pragma region Using
 using std::cout;
@@ -255,6 +257,45 @@ namespace DSS {
 
 		}
 
+	}
+
+	float Submixer::GetPitch(unsigned int p_ChannelNum) {
+		
+		FMOD_RESULT result;
+
+		//Check channel exists
+		if(p_ChannelNum > m_Channels.size()) {
+			cout << "Error! Channel number " << p_ChannelNum << " does not exist." << endl;
+			return -1.0f;
+		}
+
+		float pitch = 0.0f;
+
+		result = m_Channels[p_ChannelNum]->getPitch(&pitch);
+		errCheck(result);
+
+		return pitch;
+
+	}
+
+	void Submixer::SetPitch(unsigned int p_ChannelNum, float p_Pitch) {
+
+		FMOD_RESULT result;
+
+		//Check channel exists
+		if(p_ChannelNum > m_Channels.size()) {
+			cout << "Error! Channel number " << p_ChannelNum << " does not exist." << endl;
+			return;
+		}
+
+		float frequency = 0.0f;
+
+		result = m_Channels[p_ChannelNum]->getFrequency(&frequency);
+		errCheck(result);
+		result = m_Channels[p_ChannelNum]->setPitch(p_Pitch);
+		errCheck(result);
+		result = m_Channels[p_ChannelNum]->setFrequency(frequency);
+		errCheck(result);
 	}
 
 	bool Submixer::errCheck(int p_Error) {

@@ -32,6 +32,9 @@ namespace DSS {
 		std::vector<float> GetVolume(std::vector<unsigned int> p_ChannelNums);
 		void SetVolume(std::vector<unsigned int> p_ChannelNums, std::vector<float> p_Volumes);
 		void SetVolume(std::vector<unsigned int> p_ChannelNums, float* p_Volumes);
+		//Pitch - Singular
+		float GetPitch(unsigned int p_ChannelNum);
+		void SetPitch(unsigned int p_ChannelNum, float p_Pitch);
 
 	protected:
 

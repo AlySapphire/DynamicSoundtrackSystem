@@ -88,5 +88,9 @@ namespace DSS {
 		return m_Name;
 	}
 
+	FMOD::Sound * AudioFile::GetHandle() {
+		return m_FMODHandle;
+	}
+
 }
 
