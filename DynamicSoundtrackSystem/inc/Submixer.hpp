@@ -25,6 +25,13 @@ namespace DSS {
 		void ToggleChannelMute(std::vector<unsigned int> p_ChannelNums);
 		void MuteChannel(std::vector<unsigned int> p_ChannelNums);
 		void UnmuteChannel(std::vector<unsigned int> p_ChannelNums);
+		//Volume - Singular
+		float GetVolume(unsigned int p_ChannelNum);
+		void SetVolume(unsigned int p_ChannelNum, float p_Volume);
+		//Volume - Multiple
+		std::vector<float> GetVolume(std::vector<unsigned int> p_ChannelNums);
+		void SetVolume(std::vector<unsigned int> p_ChannelNums, std::vector<float> p_Volumes);
+		void SetVolume(std::vector<unsigned int> p_ChannelNums, float* p_Volumes);
 
 	protected:
 

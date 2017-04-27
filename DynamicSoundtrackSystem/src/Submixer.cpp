@@ -146,6 +146,117 @@ namespace DSS {
 
 	}
 
+	float Submixer::GetVolume(unsigned int p_ChannelNum) {
+		
+		FMOD_RESULT result;
+		float volume = 0.0f;
+
+		//Check channel exists
+		if(p_ChannelNum > m_Channels.size()) {
+			cout << "Error! Channel number " << p_ChannelNum << " does not exist." << endl;
+			return -1.0f;
+		}
+
+		result = m_Channels[p_ChannelNum]->getVolume(&volume);
+		errCheck(result);
+
+		return volume;
+
+	}
+
+	void Submixer::SetVolume(unsigned int p_ChannelNum, float p_Volume) {
+
+		FMOD_RESULT result;
+
+		//Check channel exists
+		if(p_ChannelNum > m_Channels.size()) {
+			cout << "Error! Channel number " << p_ChannelNum << " does not exist." << endl;
+			return;
+		}
+
+		result = m_Channels[p_ChannelNum]->setVolume(p_Volume);
+		errCheck(result);
+
+	}
+
+	std::vector<float> Submixer::GetVolume(std::vector<unsigned int> p_ChannelNums) {
+		
+		FMOD_RESULT result;
+		std::vector<float> volumes;
+
+		//Loop through the channels and get their volume
+		for(auto iter : p_ChannelNums) {
+
+			float volume = 0.0f;
+
+			//Check channel exists
+			if(iter > m_Channels.size()) {
+				cout << "Error! Channel number " << iter << " does not exist." << endl;
+				continue;
+			}
+
+			result = m_Channels[iter]->getVolume(&volume);
+			errCheck(result);
+			volumes.push_back(volume);
+
+		}
+
+		return volumes;
+
+	}
+
+	void Submixer::SetVolume(std::vector<unsigned int> p_ChannelNums, std::vector<float> p_Volumes) {
+
+		FMOD_RESULT result;
+		int i = 0;
+
+		//Check vector sizes match up
+		if(p_ChannelNums.size() != p_Volumes.size()) {
+			cout << "Error! Array sizes do not match!" << endl;
+			return;
+		}
+
+		//Loop through the channels and set their volumes
+		for(auto iter : p_ChannelNums) {
+
+			//Check channel exists
+			if(iter > m_Channels.size()) {
+				cout << "Error! Channel number " << iter << " does not exist." << endl;
+				continue;
+			}
+
+			result = m_Channels[iter]->setVolume(p_Volumes[i]);
+			errCheck(result);
+
+			i++;
+
+		}
+
+	}
+
+	void Submixer::SetVolume(std::vector<unsigned int> p_ChannelNums, float * p_Volumes) {
+
+		FMOD_RESULT result;
+		int i = 0;
+
+		//Loop through the channels and set their volumes
+		for(auto iter : p_ChannelNums) {
+
+			//Check channel exists
+			if(iter > m_Channels.size()) {
+				cout << "Error! Channel number " << iter << " does not exist." << endl;
+				continue;
+			}
+
+			result = m_Channels[iter]->setVolume(p_Volumes[i]);
+			errCheck(result);
+
+			i++;
+
+		}
+
+	}
+
 	bool Submixer::errCheck(int p_Error) {
 		if(p_Error) {
 			cout << "Error Code " << p_Error << ": " << FMOD_ErrorString((FMOD_RESULT)p_Error) << endl;
