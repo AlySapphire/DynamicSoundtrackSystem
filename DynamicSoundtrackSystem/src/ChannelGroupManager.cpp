@@ -85,7 +85,7 @@ namespace DSS {
 		}
 		
 		//Add channels to group (if any)
-		for(auto iter = 0; iter < p_Count; iter++) {
+		for(auto iter = 0; iter < (int)p_Count; iter++) {
 
 			//Safety check to avoid access violations
 			if(p_ChannelNumbers[iter] > cm->m_Channels.size()) {
@@ -373,8 +373,6 @@ namespace DSS {
 
 	Submixer * ChannelGroupManager::GetSubmixer(const char * p_GroupName) {
 		
-		//Error handle
-		FMOD_RESULT result;
 
 		int index = findChannelGroup(p_GroupName);
 

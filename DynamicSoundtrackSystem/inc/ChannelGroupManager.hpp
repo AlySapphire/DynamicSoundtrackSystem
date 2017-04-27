@@ -55,6 +55,7 @@ namespace DSS {
 		Submixer* GetSubmixer(const char* p_GroupName);
 		
 	protected:
+		friend class Event;
 
 		static ChannelGroupManager* m_Instance;
 

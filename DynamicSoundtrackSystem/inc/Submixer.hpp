@@ -36,6 +36,7 @@ namespace DSS {
 	protected:
 
 		friend class ChannelGroupManager;
+		friend class Event;
 
 		FMOD::ChannelGroup* m_Parent;
 		std::vector<FMOD::Channel*> m_Channels;
