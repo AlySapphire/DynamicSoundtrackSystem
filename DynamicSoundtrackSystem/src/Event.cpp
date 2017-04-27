@@ -135,13 +135,88 @@ namespace DSS {
 
 				} else {
 
+					Submixer* sm = cgm->GetSubmixer(iter.channelGroupName.c_str());
+
+					//Apply DSP (if any)
+					if(dsp != nullptr) {
+						result = sm->m_Channels[iter.channelNumber]->addDSP(0, dsp);
+						errCheck(result);
+					}
+
+					//Add fade points (if any)
+					if(iter.fade) {
+						unsigned long long parentClock;
+						result = sm->m_Channels[iter.channelNumber]->getDSPClock(nullptr, &parentClock);
+						errCheck(result);
+						result = sm->m_Channels[iter.channelNumber]->addFadePoint(parentClock, iter.fadeLevelStart);
+						errCheck(result);
+						result = sm->m_Channels[iter.channelNumber]->addFadePoint(parentClock + iter.duration, iter.fadeLevelEnd);
+						errCheck(result);
+					}
+
+					//Change volume
+					if(iter.volume) {
+						result = sm->m_Channels[iter.channelNumber]->getVolume(&iter.origVolume);
+						errCheck(result);
+						result = sm->m_Channels[iter.channelNumber]->setVolume(iter.volumeLevel);
+						errCheck(result);
+					}
+
+					//Mute
+					if(iter.mute) {
+						result = sm->m_Channels[iter.channelNumber]->setMute(true);
+						errCheck(result);
+					}
+
+					//Pause
+					if(iter.pause) {
+						result = sm->m_Channels[iter.channelNumber]->setPaused(true);
+						errCheck(result);
+					}
+				}
+
+			} else {
+				ChannelManager* cm = ChannelManager::Instance();
+				//Apply DSP (if any)
+				if(dsp != nullptr) {
+					result = cm->m_Channels[iter.channelNumber]->addDSP(0, dsp);
+					errCheck(result);
+				}
+
+				//Add fade points (if any)
+				if(iter.fade) {
+					unsigned long long parentClock;
+					result = cm->m_Channels[iter.channelNumber]->getDSPClock(nullptr, &parentClock);
+					errCheck(result);
+					result = cm->m_Channels[iter.channelNumber]->addFadePoint(parentClock, iter.fadeLevelStart);
+					errCheck(result);
+					result = cm->m_Channels[iter.channelNumber]->addFadePoint(parentClock + iter.duration, iter.fadeLevelEnd);
+					errCheck(result);
+				}
+
+				//Change volume
+				if(iter.volume) {
+					result = cm->m_Channels[iter.channelNumber]->getVolume(&iter.origVolume);
+					errCheck(result);
+					result = cm->m_Channels[iter.channelNumber]->setVolume(iter.volumeLevel);
+					errCheck(result);
+				}
+
+				//Mute
+				if(iter.mute) {
+					result = cm->m_Channels[iter.channelNumber]->setMute(true);
+					errCheck(result);
+				}
+
+				//Pause
+				if(iter.pause) {
+					result = cm->m_Channels[iter.channelNumber]->setPaused(true);
+					errCheck(result);
 				}
 
 			}
 
 		}
-
-
 		
 		thread timer(&DSS::Event::Timer, this, p_EventData);
 		timer.detach();
@@ -239,7 +314,8 @@ namespace DSS {
 		int duration = (int)p_EventData.front().duration;
 
 		for(auto iter = p_EventData.begin(); iter != p_EventData.end(); iter++) {
-			std::this_thread::sleep_for(milliseconds(duration));
+			if(duration > 0)
+				std::this_thread::sleep_for(milliseconds(duration));
 			
 			//Calculate next longest duration to sleep for
 			duration = (int)(iter + 1)->duration - iter->duration;
@@ -248,18 +324,131 @@ namespace DSS {
 			if(iter->DSPType != eDSP_END) {
 				auto it = m_DSPs.find(iter->DSPType);
 				
+				//Channel Group
 				if(iter->channelGroup) {
+					//Entire Channel Group
 					if(iter->channelGroupOverall) {
 						int index = cgm->findChannelGroup(iter->channelGroupName.c_str());
 						result = cgm->m_ChannelGroups[index]->removeDSP(it->second);
 						errCheck(result);
+					} else {	//Individual Channel of Channel Group
+						int index = cgm->findChannelGroup(iter->channelGroupName.c_str());
+						Submixer* sm = cgm->GetSubmixer(iter->channelGroupName.c_str());
+						result = sm->m_Channels[iter->channelNumber]->removeDSP(it->second);
+						errCheck(result);
 					}
-				} else {
+				} else {	//Individual channel
 					result = cm->m_Channels[iter->channelNumber]->removeDSP(it->second);
 					errCheck(result);
 				}
 
-				if(iter->resetValues) {
+			}
+
+			//Reset vlaues
+			if(iter->resetValues) {
+
+				//Channel Group
+				if(iter->channelGroup) {
+					int index = cgm->findChannelGroup(iter->channelGroupName.c_str());
+
+					//Entire Channel Group
+					if(iter->channelGroupOverall) {
+						
+						//Fade
+						if(iter->fade) {
+							unsigned long long parentClock = 0;
+							result = cgm->m_ChannelGroups[index]->getDSPClock(nullptr, &parentClock);
+							errCheck(result);
+							result = cgm->m_ChannelGroups[index]->addFadePoint(parentClock, iter->fadeLevelEnd);
+							errCheck(result);
+							result = cgm->m_ChannelGroups[index]->addFadePoint(parentClock + duration, iter->fadeLevelStart);
+							errCheck(result);
+						}
+
+						//Mute
+						if(iter->mute) {
+							result = cgm->m_ChannelGroups[index]->setMute(false);
+							errCheck(result);
+						}
+
+						//Volume
+						if(iter->volume) {
+							result = cgm->m_ChannelGroups[index]->setVolume(iter->origVolume);
+							errCheck(result);
+						}
+
+						//Pause
+						if(iter->pause) {
+							result = cgm->m_ChannelGroups[index]->setPaused(false);
+							errCheck(result);
+						}
+
+					} else {	//Individual channel of a Channel Group
+
+						Submixer* sm = cgm->GetSubmixer(iter->channelGroupName.c_str());
+
+						//Fade
+						if(iter->fade) {
+							unsigned long long parentClock = 0;
+							result = sm->m_Channels[iter->channelNumber]->getDSPClock(nullptr, &parentClock);
+							errCheck(result);
+							result = sm->m_Channels[iter->channelNumber]->addFadePoint(parentClock, iter->fadeLevelEnd);
+							errCheck(result);
+							result = sm->m_Channels[iter->channelNumber]->addFadePoint(parentClock + duration, iter->fadeLevelStart);
+							errCheck(result);
+						}
+
+						//Mute
+						if(iter->mute) {
+							result = sm->m_Channels[iter->channelNumber]->setMute(false);
+							errCheck(result);
+						}
+
+						//Volume
+						if(iter->volume) {
+							result = sm->m_Channels[iter->channelNumber]->setVolume(iter->origVolume);
+							errCheck(result);
+						}
+
+						//Pause
+						if(iter->pause) {
+							result = sm->m_Channels[iter->channelNumber]->setPaused(false);
+							errCheck(result);
+						}
+
+					}
+				} else {	//Individual Channel
+
+					FMOD::Channel* channel = cm->m_Channels[iter->channelNumber];
+
+					//Fade
+					if(iter->fade) {
+						unsigned long long parentClock = 0;
+						result = channel->getDSPClock(nullptr, &parentClock);
+						errCheck(result);
+						result = channel->addFadePoint(parentClock, iter->fadeLevelEnd);
+						errCheck(result);
+						result = channel->addFadePoint(parentClock + duration, iter->fadeLevelStart);
+						errCheck(result);
+					}
+
+					//Mute
+					if(iter->mute) {
+						result = channel->setMute(false);
+						errCheck(result);
+					}
+
+					//Volume
+					if(iter->volume) {
+						result = channel->setVolume(iter->origVolume);
+						errCheck(result);
+					}
+
+					//Pause
+					if(iter->pause) {
+						result = channel->setPaused(false);
+						errCheck(result);
+					}
 
 				}
 
