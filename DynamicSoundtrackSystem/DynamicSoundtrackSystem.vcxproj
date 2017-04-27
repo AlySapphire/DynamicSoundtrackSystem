@@ -111,9 +111,7 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
-XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
-XCOPY "$(ProjectDir)inc\ChannelGroupManager.hpp" "$(TargetDir)" /Y /S
+      <Command>XCOPY "$(ProjectDir)inc" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -153,9 +151,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
-XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
-XCOPY "$(ProjectDir)inc\ChannelGroupManager.hpp" "$(TargetDir)" /Y /S
+      <Command>XCOPY "$(ProjectDir)inc" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -181,9 +177,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>XCOPY "$(ProjectDir)inc\AudioManager.hpp" "$(TargetDir)" /Y /S
-XCOPY "$(ProjectDir)inc\ChannelManager.hpp" "$(TargetDir)" /Y /S
-XCOPY "$(ProjectDir)inc\ChannelGroupManager.hpp" "$(TargetDir)" /Y /S
+      <Command>XCOPY "$(ProjectDir)inc" "$(TargetDir)" /Y /S
 XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Configuration)" /S /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -197,6 +191,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     <ClInclude Include="inc\ChannelManager.hpp" />
     <ClInclude Include="inc\Event.hpp" />
     <ClInclude Include="inc\Marker.hpp" />
+    <ClInclude Include="inc\Submixer.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AudioFile.cpp" />
@@ -205,6 +200,7 @@ XCOPY "$(SolutionDir)$(Configuration)" "$(BOOTSTRAP_DIR)\dependencies\DSS\$(Conf
     <ClCompile Include="src\ChannelManager.cpp" />
     <ClCompile Include="src\Event.cpp" />
     <ClCompile Include="src\Marker.cpp" />
+    <ClCompile Include="src\Submixer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

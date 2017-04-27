@@ -15,6 +15,7 @@ namespace FMOD {
 namespace DSS {
 
 	class AudioManager;
+	class Submixer;
 
 	class ChannelGroupManager {
 	public:
@@ -49,16 +50,22 @@ namespace DSS {
 		bool IsMuted(const char* p_GroupName);
 		//Current number of channels
 		int GetNumChannels(const char* p_GroupName);
+
+		//Submixer Getter
+		Submixer* GetSubmixer(const char* p_GroupName);
 		
 	protected:
 
 		static ChannelGroupManager* m_Instance;
 
 		std::vector<FMOD::ChannelGroup*> m_ChannelGroups;
+		std::vector<Submixer*> m_ChannelGroupMixer;
 
 		int findChannelGroup(const char* p_ChannelGroupName);
 
 		bool errCheck(int p_Error);
+
+		void CreateSubmixer(FMOD::ChannelGroup** p_Parent);
 
 	};
 

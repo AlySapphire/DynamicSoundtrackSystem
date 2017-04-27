@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "ChannelManager.hpp"
+#include "Submixer.hpp"
 
 #pragma region Using
 using std::cout;
@@ -31,10 +32,14 @@ namespace DSS {
 		if(m_Instance != nullptr)		delete m_Instance;
 
 		//Free all the channel group handles
-
 		for(auto iter : m_ChannelGroups) {
 			result = iter->release();
 			errCheck(result);
+		}
+
+		//Free all the submixers
+		for(auto iter : m_ChannelGroupMixer) {
+			delete iter;
 		}
 
 	}
@@ -102,6 +107,9 @@ namespace DSS {
 		group->setPaused(true);
 
 		m_ChannelGroups.push_back(group);
+
+		//Create Submixer
+		CreateSubmixer(&group);
 		
 		return true;
 	}
@@ -162,6 +170,9 @@ namespace DSS {
 		group->setPaused(true);
 
 		m_ChannelGroups.push_back(group);
+
+		//Create Submixer
+		CreateSubmixer(&group);
 
 		return true;
 
@@ -360,6 +371,22 @@ namespace DSS {
 
 	}
 
+	Submixer * ChannelGroupManager::GetSubmixer(const char * p_GroupName) {
+		
+		//Error handle
+		FMOD_RESULT result;
+
+		int index = findChannelGroup(p_GroupName);
+
+		if(index == -1) {
+			cout << "Error! Invalid channel group name " << p_GroupName << endl;
+			return nullptr;
+		}
+
+		return m_ChannelGroupMixer[index];
+
+	}
+
 	bool ChannelGroupManager::AddChannels(const char * p_Name, std::vector<unsigned int> p_ChannelNumbers) {
 		
 		//Error handle
@@ -390,6 +417,9 @@ namespace DSS {
 			}
 		}
 		
+		//Update the submixer
+		m_ChannelGroupMixer[index]->AddChannels();
+
 		return true;
 	}
 
@@ -430,6 +460,14 @@ namespace DSS {
 		}
 
 		return true;
+	}
+
+	void ChannelGroupManager::CreateSubmixer(FMOD::ChannelGroup ** p_Parent) {
+
+		Submixer* submixer = new Submixer(p_Parent);
+
+		m_ChannelGroupMixer.push_back(submixer);
+
 	}
 
 }
