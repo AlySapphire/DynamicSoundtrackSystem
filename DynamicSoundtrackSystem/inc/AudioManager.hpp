@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 namespace FMOD {
 
@@ -17,11 +18,38 @@ namespace DSS {
 	}eTIME_UNIT;
 
 	typedef enum {
-		eEVENT_HIGHPASS,
-		eEVENT_LOWPASS,
-		eEVENT_ECHO,
-		eEVENT_FLANGE
-	}eEVENT_TYPE;
+		eDSP_HIGHPASS,
+		eDSP_LOWPASS,
+		eDSP_ECHO,
+		eDSP_FLANGE,
+		eDSP_END
+	}eDSP_TYPE;
+
+	struct EventData {
+
+		unsigned int duration;
+		bool mute;
+		bool pause;
+		bool fade;
+		float fadeLevelStart;
+		float fadeLevelEnd;
+		bool volume;
+		float volumeLevel;
+		bool channelGroup;
+		std::string channelGroupName;
+		bool channelGroupOverall;
+		int channelNumber;
+		bool resetValues;
+		eDSP_TYPE DSPType;
+
+		float origVolume;
+
+		EventData() : duration(0), mute(false), pause(false), fade(false), volume(false), channelGroup(false), fadeLevelStart(0.0f), 
+					  fadeLevelEnd(0.0f), volumeLevel(0.0f), channelNumber(-1), channelGroupName(""), DSPType(eDSP_END), channelGroupOverall(false), 
+					  resetValues(false), origVolume(0.0f) { }
+
+
+	};
 
 	class AudioFile;
 	class ChannelManager;
@@ -40,7 +68,7 @@ namespace DSS {
 		bool AddAudio(const char* p_Path, bool p_LargeFile, unsigned int p_Mode = 0);
 		
 		//Create a timed event
-		bool CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType);
+		bool CreateTimedEvent(unsigned int p_TimeMs, eDSP_TYPE p_EventType);
 
 		ChannelManager* channelManager;
 
@@ -49,6 +77,7 @@ namespace DSS {
 	protected:
 
 		friend class ChannelGroupManager;
+		friend class Event;
 
 		static AudioManager* m_Instance;
 		FMOD::System* m_System;

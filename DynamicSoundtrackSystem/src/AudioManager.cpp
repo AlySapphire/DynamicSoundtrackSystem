@@ -125,15 +125,15 @@ namespace DSS {
 		return true;
 	}
 
-	bool AudioManager::CreateTimedEvent(unsigned int p_TimeMs, eEVENT_TYPE p_EventType) {
+	bool AudioManager::CreateTimedEvent(unsigned int p_TimeMs, eDSP_TYPE p_EventType) {
 		
 		//Event handle
 		Event soundEvent;
 
-		if(!soundEvent.CreateTimedEvent(p_TimeMs, p_EventType, &m_MasterGroup, &m_System)) {
-			cout << "Error: Could not create event." << endl;
-			return false;
-		}
+		//if(!soundEvent.CreateTimedEvent(p_TimeMs, p_EventType, &m_MasterGroup, &m_System)) {
+		//	cout << "Error: Could not create event." << endl;
+		//	return false;
+		//}
 		
 		return true;
 	}
