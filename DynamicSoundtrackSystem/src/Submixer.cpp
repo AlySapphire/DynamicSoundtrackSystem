@@ -3,6 +3,7 @@
 #include <fmod.hpp>
 #include <fmod_errors.h>
 #include <iostream>
+#include <algorithm>
 
 #pragma region Using
 using std::cout;
@@ -30,6 +31,8 @@ namespace DSS {
 			errCheck(result);
 			m_Channels.push_back(channel);
 		}
+
+		std::reverse(m_Channels.begin(), m_Channels.end());
 
 	}
 
