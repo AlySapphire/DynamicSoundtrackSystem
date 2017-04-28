@@ -20,6 +20,31 @@ namespace DSS {
 		eDSP_END
 	}eDSP_TYPE;
 
+	typedef enum {
+		eDSP_PARAMETER_VALUE_TYPE_INT,
+		eDSP_PARAMETER_VALUE_TYPE_BOOL,
+		eDSP_PARAMETER_VALUE_TYPE_FLOAT,
+		eDSP_PARAMETER_VALUE_TYPE_DATA
+	}eDSP_PARAMETER_VALUE_TYPE;
+
+	typedef struct {
+		unsigned int length;
+		void* dataBlock;
+	} voidDataInfo;
+
+	typedef union {
+		bool boolTypeArgument;
+		int intTypeArgument;
+		float floatTypeArgument;
+		voidDataInfo dataTypeArgument;
+	} DSP_Paramater_Union;
+
+	typedef struct {
+		int parameterIndex;
+		eDSP_PARAMETER_VALUE_TYPE dataType;
+		DSP_Paramater_Union value;
+	} DSP_Parameter;
+
 	struct EventData {
 
 		unsigned int duration;
@@ -36,7 +61,7 @@ namespace DSS {
 		int channelNumber;
 		bool resetValues;
 		eDSP_TYPE DSPType;
-
+		std::vector<DSP_Parameter> DSP_Parameters;
 		float origVolume;
 
 		EventData() : duration(0), mute(false), pause(false), fade(false), volume(false), channelGroup(false), fadeLevelStart(0.0f), 
