@@ -13,11 +13,6 @@ namespace FMOD {
 namespace DSS {
 
 	typedef enum {
-		eTIME_MS,
-		eTIME_SAMPLES
-	}eTIME_UNIT;
-
-	typedef enum {
 		eDSP_HIGHPASS,
 		eDSP_LOWPASS,
 		eDSP_ECHO,
@@ -93,7 +88,6 @@ namespace DSS {
 
 		float m_Time = 0.0f;
 		unsigned int m_ChannelTracker = 0;
-		unsigned int m_ChannelGroupTracker = 1;
 
 		bool errorCheck(int p_Err);
 
