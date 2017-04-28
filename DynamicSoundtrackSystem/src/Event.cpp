@@ -300,7 +300,7 @@ namespace DSS {
 
 	}
 
-	void Event::Timer(std::vector<EventData>& p_EventData) {
+	void Event::Timer(std::vector<EventData> p_EventData) {
 
 		FMOD_RESULT result;
 
@@ -318,7 +318,8 @@ namespace DSS {
 				std::this_thread::sleep_for(milliseconds(duration));
 			
 			//Calculate next longest duration to sleep for
-			duration = (int)(iter + 1)->duration - iter->duration;
+			if(iter + 1 != p_EventData.end())
+				duration = (int)(iter + 1)->duration - iter->duration;
 			
 			//Remove DSP (if any)
 			if(iter->DSPType != eDSP_END) {
