@@ -36,9 +36,6 @@ namespace DSS {
 		//std::vector<FMOD::DSP*> m_DSPs;
 		std::map<unsigned int, FMOD::DSP*> m_DSPs;
 
-		void CreateDSPEvent(unsigned int p_Duration, FMOD::ChannelGroup** p_MasterGroup, FMOD::System** p_System);
-		void CreateMultiTrackingEvent();
-
 		void Timer(std::vector<EventData> p_EventData, std::map<unsigned int, FMOD::DSP*>& p_DSPs);
 
 	};
