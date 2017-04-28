@@ -53,6 +53,7 @@ namespace DSS {
 
 	class AudioFile;
 	class ChannelManager;
+	class Event;
 
 	class AudioManager {
 	public:
@@ -68,7 +69,7 @@ namespace DSS {
 		bool AddAudio(const char* p_Path, bool p_LargeFile, unsigned int p_Mode = 0);
 		
 		//Create a timed event
-		bool CreateTimedEvent(unsigned int p_TimeMs, eDSP_TYPE p_EventType);
+		void ActivateEvents(std::vector<EventData>& p_EventData);
 
 		ChannelManager* channelManager;
 
@@ -87,6 +88,8 @@ namespace DSS {
 
 		//Master channel group
 		FMOD::ChannelGroup* m_MasterGroup;
+
+		static Event* m_EventSystem;
 
 		float m_Time = 0.0f;
 		unsigned int m_ChannelTracker = 0;

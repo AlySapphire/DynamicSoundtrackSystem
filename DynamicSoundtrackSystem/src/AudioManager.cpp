@@ -21,6 +21,7 @@ typedef unsigned int uint;
 namespace DSS {
 
 	AudioManager* AudioManager::m_Instance = nullptr;
+	Event* AudioManager::m_EventSystem = nullptr;
 
 	AudioManager::AudioManager() {
 
@@ -32,6 +33,8 @@ namespace DSS {
 
 		//Clean up memory
 		if(m_Instance != nullptr)	delete m_Instance;
+
+		if(m_EventSystem != nullptr)	delete m_EventSystem;
 
 	}
 
@@ -64,7 +67,10 @@ namespace DSS {
 		//Check for errors
 		if(!errorCheck(result))		return false;
 
+		m_EventSystem = new Event();
+
 		return true;
+
 	}
 
 	void AudioManager::Shutdown() {
@@ -125,17 +131,10 @@ namespace DSS {
 		return true;
 	}
 
-	bool AudioManager::CreateTimedEvent(unsigned int p_TimeMs, eDSP_TYPE p_EventType) {
-		
-		//Event handle
-		Event soundEvent;
+	void AudioManager::ActivateEvents(std::vector<EventData>& p_EventData) {
 
-		//if(!soundEvent.CreateTimedEvent(p_TimeMs, p_EventType, &m_MasterGroup, &m_System)) {
-		//	cout << "Error: Could not create event." << endl;
-		//	return false;
-		//}
-		
-		return true;
+		m_EventSystem->CreateTimedEvent(p_EventData);
+
 	}
 
 	AudioManager * AudioManager::Instance() {
