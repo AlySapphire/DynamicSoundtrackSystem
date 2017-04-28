@@ -75,6 +75,30 @@ namespace DSS {
 							break;
 					}
 
+					//Go through paramters 
+					for(auto params : iter.DSP_Parameters) {
+
+						switch(params.dataType) {
+							case eDSP_PARAMETER_VALUE_TYPE_BOOL:
+								result = dsp->setParameterBool(params.parameterIndex, params.value.boolTypeArgument);
+								errCheck(result);
+								break;
+							case eDSP_PARAMETER_VALUE_TYPE_INT:
+								result = dsp->setParameterInt(params.parameterIndex, params.value.intTypeArgument);
+								errCheck(result);
+								break;
+							case eDSP_PARAMETER_VALUE_TYPE_FLOAT:
+								result = dsp->setParameterFloat(params.parameterIndex, params.value.floatTypeArgument);
+								errCheck(result);
+								break;
+							case eDSP_PARAMETER_VALUE_TYPE_DATA:
+								result = dsp->setParameterData(params.parameterIndex, params.value.dataTypeArgument.dataBlock, params.value.dataTypeArgument.length);
+								errCheck(result);
+								break;
+						}
+
+					}
+
 					m_DSPs.emplace(iter.DSPType, dsp);
 
 				} else {
