@@ -218,7 +218,7 @@ namespace DSS {
 
 		}
 		
-		thread timer(&DSS::Event::Timer, this, p_EventData);
+		thread timer(&DSS::Event::Timer, this, p_EventData, *&m_DSPs);
 		timer.detach();
 
 		return true;
@@ -300,7 +300,7 @@ namespace DSS {
 
 	}
 
-	void Event::Timer(std::vector<EventData> p_EventData) {
+	void Event::Timer(std::vector<EventData> p_EventData, std::map<unsigned int, FMOD::DSP*>& p_DSPs) {
 
 		FMOD_RESULT result;
 
@@ -323,7 +323,7 @@ namespace DSS {
 			
 			//Remove DSP (if any)
 			if(iter->DSPType != eDSP_END) {
-				auto it = m_DSPs.find(iter->DSPType);
+				auto it = p_DSPs.find(iter->DSPType);
 				
 				//Channel Group
 				if(iter->channelGroup) {
