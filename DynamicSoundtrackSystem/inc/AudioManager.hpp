@@ -86,7 +86,7 @@ namespace DSS {
 		void Update(float deltaTime);
 
 		//Add an audio source to the sound manager
-		bool AddAudio(const char* p_Path, bool p_LargeFile, unsigned int p_Mode = 0);
+		bool AddAudio(const char* p_Path, bool p_LargeFile);
 		
 		//Create a timed event
 		void ActivateEvents(std::vector<EventData>& p_EventData);

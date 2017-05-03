@@ -107,13 +107,13 @@ namespace DSS {
 		result = m_System->update();
 	}
 
-	bool AudioManager::AddAudio(const char * p_Path, bool p_LargeFile, unsigned int p_Mode) {
+	bool AudioManager::AddAudio(const char * p_Path, bool p_LargeFile) {
 
 		AudioFile* newFile = new AudioFile();
 
 		FMOD::Channel* channel = 0;
 
-		if(!newFile->Load(p_Path, m_System, p_LargeFile, m_ChannelTracker, &channel, p_Mode)) {
+		if(!newFile->Load(p_Path, m_System, p_LargeFile, m_ChannelTracker, &channel)) {
 			cout << "Could not add audio file " << p_Path << endl;
 			delete newFile;
 			return false;

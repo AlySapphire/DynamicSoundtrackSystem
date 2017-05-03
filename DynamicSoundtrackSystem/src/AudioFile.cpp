@@ -18,7 +18,7 @@ namespace DSS {
 	AudioFile::~AudioFile() {
 	}
 
-	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel** p_Channel, int p_Mode) {
+	bool AudioFile::Load(const char * p_Path, FMOD::System * p_System, bool p_LargeFile, unsigned int p_ChannelNum, FMOD::Channel** p_Channel) {
 		
 		FMOD_RESULT result;
 
@@ -28,10 +28,10 @@ namespace DSS {
 		//Load the sound
 		switch(p_LargeFile) {
 			case true:
-				result = p_System->createStream(p_Path, p_Mode, 0, &m_FMODHandle);
+				result = p_System->createStream(p_Path, FMOD_LOOP_NORMAL, 0, &m_FMODHandle);
 				break;
 			case false:
-				result = p_System->createSound(p_Path, p_Mode, 0, &m_FMODHandle);
+				result = p_System->createSound(p_Path, FMOD_LOOP_NORMAL, 0, &m_FMODHandle);
 				break;
 		}
 		
