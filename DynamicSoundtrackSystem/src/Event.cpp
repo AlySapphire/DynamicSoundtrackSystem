@@ -77,6 +77,27 @@ namespace DSS {
 							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT, &dsp);
 							errCheck(result);
 							break;
+						case eDSP_OSCILLATOR:
+							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_OSCILLATOR, &dsp);
+							errCheck(result);
+							break;
+						case eDSP_DISTORTION:
+							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_DISTORTION, &dsp);
+							errCheck(result);
+							break;
+						case eDSP_NORMALIZE:
+							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_NORMALIZE, &dsp);
+							errCheck(result);
+							break;
+						case eDSP_CHORUS:
+							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_CHORUS, &dsp);
+							errCheck(result);
+							break;
+						case eDSP_TREMOLO:
+							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_TREMOLO, &dsp);
+							errCheck(result);
+							break;
+
 					}
 
 					//Go through paramters 
