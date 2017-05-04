@@ -17,6 +17,7 @@ namespace DSS {
 		eDSP_LOWPASS,
 		eDSP_ECHO,
 		eDSP_FLANGE,
+		eDSP_PITCH,
 		eDSP_END
 	}eDSP_TYPE;
 

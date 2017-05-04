@@ -73,6 +73,10 @@ namespace DSS {
 							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_LOWPASS, &dsp);
 							errCheck(result);
 							break;
+						case eDSP_PITCH:
+							result = am->m_System->createDSPByType(FMOD_DSP_TYPE_PITCHSHIFT, &dsp);
+							errCheck(result);
+							break;
 					}
 
 					//Go through paramters 
