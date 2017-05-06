@@ -105,20 +105,34 @@ namespace DSS {
 		FMOD_RESULT result;
 		bool paused = false;
 		
+		result = m_Channels[p_ChannelNum]->getPaused(&paused);
+		errCheck(result);
 
+		return paused;
 
 	}
 
 	float ChannelManager::GetVolume(unsigned int p_ChannelNum) {
 
-		if(!CheckBounds(p_ChannelNum))	return -1;
+		if(!CheckBounds(p_ChannelNum))	return -1.0f;
 
-		return 0.0f;
+		FMOD_RESULT result;
+		float volume = -1.0f;
+
+		result = m_Channels[p_ChannelNum]->getVolume(&volume);
+		errCheck(result);
+
+		return volume;
 	}
 
-	void ChannelManager::SetVolume(unsigned int p_ChannelNum) {
+	void ChannelManager::SetVolume(unsigned int p_ChannelNum, float p_Volume) {
 
 		if(!CheckBounds(p_ChannelNum))	return;
+
+		FMOD_RESULT result;
+
+		result = m_Channels[p_ChannelNum]->setVolume(p_Volume);
+		errCheck(result);
 
 	}
 
@@ -126,24 +140,48 @@ namespace DSS {
 
 		if(!CheckBounds(p_ChannelNum))	return;
 
+		FMOD_RESULT result;
+		bool muted = false;
+
+		result = m_Channels[p_ChannelNum]->getMute(&muted);
+		errCheck(result);
+		result = m_Channels[p_ChannelNum]->setMute(!muted);
+		errCheck(result);
+
 	}
 
 	bool ChannelManager::isMuted(unsigned int p_ChannelNum) {
 
 		if(!CheckBounds(p_ChannelNum))	return false;
 
-		return false;
+		FMOD_RESULT result;
+		bool muted = false;
+
+		result = m_Channels[p_ChannelNum]->getMute(&muted);
+		errCheck(result);
+
+		return muted;
 	}
 
 	void ChannelManager::Mute(unsigned int p_ChannelNum) {
 
 		if(!CheckBounds(p_ChannelNum))	return;
 
+		FMOD_RESULT result;
+
+		result = m_Channels[p_ChannelNum]->setMute(true);
+		errCheck(result);
+
 	}
 
 	void ChannelManager::Unmute(unsigned int p_ChannelNum) {
 
 		if(!CheckBounds(p_ChannelNum))	return;
+
+		FMOD_RESULT result;
+
+		result = m_Channels[p_ChannelNum]->setMute(true);
+		errCheck(result);
 
 	}
 

@@ -30,7 +30,7 @@ namespace DSS {
 
 		//Volume controls
 		float GetVolume(unsigned int p_ChannelNum);
-		void SetVolume(unsigned int p_ChannelNum);
+		void SetVolume(unsigned int p_ChannelNum, float p_Volume);
 
 		//Mute controls
 		void ToggleMute(unsigned int p_ChannelNum);
