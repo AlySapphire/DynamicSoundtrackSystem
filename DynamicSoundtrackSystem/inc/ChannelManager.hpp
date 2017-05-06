@@ -50,6 +50,7 @@ namespace DSS {
 		void AddChannel(FMOD::Channel** p_Channel);
 
 		bool errCheck(int p_Error);
+		bool CheckBounds(unsigned int p_ChannelNum);
 
 	};
 

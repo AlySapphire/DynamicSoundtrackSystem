@@ -135,4 +135,15 @@ namespace DSS {
 		return true;
 	}
 
+	bool ChannelManager::CheckBounds(unsigned int p_ChannelNum) {
+		
+		if(p_ChannelNum >= m_Channels.size() || m_Channels.empty()) {
+			cout << "Error! Invalid Channel index " << p_ChannelNum << endl;
+			return false;
+		}
+
+		return true;
+
+	}
+
 }
