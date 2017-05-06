@@ -90,6 +90,35 @@ namespace DSS {
 
 	}
 
+	bool ChannelManager::isPaused(unsigned int p_ChannelNum) {
+		
+		FMOD_RESULT result;
+		bool paused = false;
+		
+
+
+	}
+
+	float ChannelManager::GetVolume(unsigned int p_ChannelNum) {
+		return 0.0f;
+	}
+
+	void ChannelManager::SetVolume(unsigned int p_ChannelNum) {
+	}
+
+	void ChannelManager::ToggleMute(unsigned int p_ChannelNum) {
+	}
+
+	bool ChannelManager::isMuted(unsigned int p_ChannelNum) {
+		return false;
+	}
+
+	void ChannelManager::Mute(unsigned int p_ChannelNum) {
+	}
+
+	void ChannelManager::Unmute(unsigned int p_ChannelNum) {
+	}
+
 	void ChannelManager::AddChannel(FMOD::Channel ** p_Channel) {
 
 		m_Channels.push_back(*p_Channel);

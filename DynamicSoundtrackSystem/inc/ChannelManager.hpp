@@ -26,6 +26,17 @@ namespace DSS {
 		void ToggleChannelPause(unsigned int p_ChannelNum);
 		void PlayChannel(unsigned int p_ChannelNum);
 		void PauseChannel(unsigned int p_ChannelNum);
+		bool isPaused(unsigned int p_ChannelNum);
+
+		//Volume controls
+		float GetVolume(unsigned int p_ChannelNum);
+		void SetVolume(unsigned int p_ChannelNum);
+
+		//Mute controls
+		void ToggleMute(unsigned int p_ChannelNum);
+		bool isMuted(unsigned int p_ChannelNum);
+		void Mute(unsigned int p_ChannelNum);
+		void Unmute(unsigned int p_ChannelNum);
 
 	protected:
 		friend class AudioManager;
