@@ -32,8 +32,9 @@ namespace DSS {
 
 		//Error handle
 		FMOD_RESULT result;
+		unsigned int pos = -1;
 
-		unsigned int pos = 0;
+		if(!CheckBounds(p_ChannelNum))	return pos;
 
 		result = m_Channels[p_ChannelNum]->getPosition(&pos, FMOD_TIMEUNIT_MS);
 
@@ -44,6 +45,8 @@ namespace DSS {
 	}
 
 	void ChannelManager::SetChannelLoopPoints(unsigned int p_ChannelNum, unsigned int p_Start, unsigned int p_End) {
+
+		if(!CheckBounds(p_ChannelNum))	return;
 
 		//Error handle
 		FMOD_RESULT result;
@@ -57,9 +60,10 @@ namespace DSS {
 
 	void ChannelManager::ToggleChannelPause(unsigned int p_ChannelNum) {
 
+		if(!CheckBounds(p_ChannelNum))	return;
+
 		//Error handle
 		FMOD_RESULT result;
-
 		bool paused;
 
 		//Get the current pause state and invert it
@@ -72,6 +76,8 @@ namespace DSS {
 
 	void ChannelManager::PlayChannel(unsigned int p_ChannelNum) {
 
+		if(!CheckBounds(p_ChannelNum))	return;
+
 		//Error handle
 		FMOD_RESULT result;
 
@@ -81,6 +87,8 @@ namespace DSS {
 	}
 
 	void ChannelManager::PauseChannel(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return;
 
 		//Error handle
 		FMOD_RESULT result;
@@ -92,6 +100,8 @@ namespace DSS {
 
 	bool ChannelManager::isPaused(unsigned int p_ChannelNum) {
 		
+		if(!CheckBounds(p_ChannelNum))	return false;
+
 		FMOD_RESULT result;
 		bool paused = false;
 		
@@ -100,23 +110,41 @@ namespace DSS {
 	}
 
 	float ChannelManager::GetVolume(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return -1;
+
 		return 0.0f;
 	}
 
 	void ChannelManager::SetVolume(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return;
+
 	}
 
 	void ChannelManager::ToggleMute(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return;
+
 	}
 
 	bool ChannelManager::isMuted(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return false;
+
 		return false;
 	}
 
 	void ChannelManager::Mute(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return;
+
 	}
 
 	void ChannelManager::Unmute(unsigned int p_ChannelNum) {
+
+		if(!CheckBounds(p_ChannelNum))	return;
+
 	}
 
 	void ChannelManager::AddChannel(FMOD::Channel ** p_Channel) {
