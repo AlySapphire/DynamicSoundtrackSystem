@@ -27,7 +27,10 @@ routine run the Shutdown function of the audio manager to clean up allocated mem
 the audio manager has an update method that should be called once per frame during your applications’ update method and passed a deltaTime 
 argument.
 Accessing any class or method in this library requires you to go through the DSS namespace like so:
-`DSS::AudioManager::Instance()->Init();`
+```c++
+DSS::AudioManager::Instance()->Init();
+```
+
 ### Include the following headers
 - AudioManager.hpp – Audio Manager the core header file that contains most of the necessary operations of the package
 -	ChannelManager.hpp – Channel Manager for operations to perform on individual channels.
@@ -46,4 +49,6 @@ in the relevant parameters. These structures have default values that are not ru
 relevant parts that you want activated. Once your Eventdata structure has your desired information, feed it into the vector. 
 When you want to run the events, just call the ActivateEvents method of the audio manager and feed in the vector of Eventdata 
 structures like so:
-`DSS::AudioManager::Instance()->ActivateEvents(myEventsVector);`
+```c++
+DSS::AudioManager::Instance()->ActivateEvents(myEventsVector);
+```
